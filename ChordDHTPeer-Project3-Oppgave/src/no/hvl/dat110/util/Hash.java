@@ -23,9 +23,19 @@ public class Hash {
 		
 		// we use MD5 with 128 bits digest
 		
-		// compute the hash of the input 'entity'
 		
-		// convert the hash into hex format
+		try {
+			// compute the hash of the input 'entity'
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] messageDigest = md.digest(entity.getBytes()); 
+			// convert the hash into hex format
+			
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		
 		// convert the hex into BigInteger
 		
@@ -37,6 +47,7 @@ public class Hash {
 	public static BigInteger addressSize() {
 		
 		// Task: compute the address size of MD5
+		
 		
 		// get the digest length
 		

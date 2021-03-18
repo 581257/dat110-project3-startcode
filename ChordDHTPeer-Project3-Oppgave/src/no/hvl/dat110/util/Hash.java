@@ -2,7 +2,8 @@ package no.hvl.dat110.util;
 
 /**
  * project 3
- * @author tdoy
+
+ * @author Regine
  *
  */
 

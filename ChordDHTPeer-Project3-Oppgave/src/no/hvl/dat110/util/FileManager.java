@@ -22,6 +22,12 @@ import no.hvl.dat110.middleware.Message;
 import no.hvl.dat110.rpc.interfaces.NodeInterface;
 import no.hvl.dat110.util.Hash;
 
+
+/**
+ * 
+ * @author vilde
+ *
+ */
 public class FileManager {
 	
 	private BigInteger[] replicafiles;							// array stores replicated files for distribution to matching nodes

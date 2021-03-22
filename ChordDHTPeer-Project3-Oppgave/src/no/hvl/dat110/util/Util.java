@@ -22,11 +22,6 @@ import java.util.Map;
 import no.hvl.dat110.middleware.Node;
 import no.hvl.dat110.rpc.interfaces.NodeInterface;
 
-/**
- * 
- * @author vilde
- *
- */
 public class Util {
 	 
 	public static String activeIP = null;
@@ -50,7 +45,6 @@ public class Util {
 		// implement: read the descriptions above
 		boolean cond = false;
 		
-		BigInteger mod = lower.mod(upper);
 		
 		return cond;
 	}

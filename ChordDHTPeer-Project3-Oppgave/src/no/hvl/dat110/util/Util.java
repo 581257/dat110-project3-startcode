@@ -49,7 +49,8 @@ public class Util {
 		
 		// implement: read the descriptions above
 		boolean cond = false;
-
+		
+		BigInteger mod = lower.mod(upper);
 		
 		return cond;
 	}

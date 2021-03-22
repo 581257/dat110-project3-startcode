@@ -6,6 +6,7 @@ package no.hvl.dat110.util;
  * @author tdoy
  */
 
+
 import java.math.BigInteger;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -21,6 +22,11 @@ import java.util.Map;
 import no.hvl.dat110.middleware.Node;
 import no.hvl.dat110.rpc.interfaces.NodeInterface;
 
+/**
+ * 
+ * @author vilde
+ *
+ */
 public class Util {
 	 
 	public static String activeIP = null;

@@ -166,8 +166,6 @@ public class FileManager {
 		// Task: Given all the active peers of a file (activeNodesforFile()), find which
 		// is holding the primary copy
 		
-		NodeInterface primary = null;
-		
 		// iterate over the activeNodesforFile
 		for (Message m : activeNodesforFile) {
 			// for each active peer (saved as Message)

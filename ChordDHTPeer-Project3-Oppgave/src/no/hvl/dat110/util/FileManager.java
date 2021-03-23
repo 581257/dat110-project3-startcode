@@ -87,14 +87,24 @@ public class FileManager {
 
 		// Task1: Given a filename, make replicas and distribute them to all active
 		// peers such that: pred < replica <= peer
-		
 
+		
 		// Task2: assign a replica as the primary for this file. Hint, see the slide
 		// (project 3) on Canvas
+		Random rnd = new Random();
+		int index = rnd.nextInt(Util.numReplicas-1);
 		
+		//Key(file) = hash(file), der hash står sto egentlig fileId
+		hash = Hash.hashOf(filename);
+		
+		if (counter == index)
+			chordnode.saveFileContent(filename, hash, bytesOfFile, true); //save the file in the memory of the peer
+		else 
+			chordnode.saveFileContent(filename, hash, bytesOfFile, false);
 
 		// create replicas of the filename
-
+		
+		
 		// iterate over the replicas
 
 		// for each replica, find its successor by performing findSuccessor(replica)
@@ -102,6 +112,7 @@ public class FileManager {
 		// call the addKey on the successor and add the replica
 
 		// call the saveFileContent() on the successor
+		
 
 		// increment counter
 		counter++;

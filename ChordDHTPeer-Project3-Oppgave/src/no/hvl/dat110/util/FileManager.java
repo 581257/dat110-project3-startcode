@@ -67,8 +67,7 @@ public class FileManager {
 			filename = filename+String.valueOf(i);
 			
 			// hash the replica
-			Hash hashFile = new Hash();
-			hash = hashFile.hashOf(filename);
+			hash = Hash.hashOf(filename);
 			
 			// store the hash in the replicafiles array.
 			replicafiles[i] = hash;
@@ -87,6 +86,16 @@ public class FileManager {
 
 		// Task1: Given a filename, make replicas and distribute them to all active
 		// peers such that: pred < replica <= peer
+		createReplicaFiles();
+		
+		NodeInterface successor = null;
+		NodeInterface predecessor = null;
+		
+		for (int i = 0; i < replicafiles.length; i++) {
+			successor = chordnode.findSuccessor(replicafiles[i]);
+			predecessor = chordnode.findSuccessor(replicafiles[i]).getPredecessor();
+		}
+		
 		
 		// Task2: assign a replica as the primary for this file. Hint, see the slide
 		// (project 3) on Canvas

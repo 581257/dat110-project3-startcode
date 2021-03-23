@@ -14,6 +14,7 @@ import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
@@ -37,7 +38,6 @@ public class FileManager {
 	private BigInteger hash;
 	private byte[] bytesOfFile;
 	private String sizeOfByte;
-
 	private Set<Message> activeNodesforFile = null;
 
 	public FileManager(NodeInterface chordnode) throws RemoteException {
@@ -87,7 +87,6 @@ public class FileManager {
 
 		// Task1: Given a filename, make replicas and distribute them to all active
 		// peers such that: pred < replica <= peer
-
 		
 		// Task2: assign a replica as the primary for this file. Hint, see the slide
 		// (project 3) on Canvas
@@ -103,15 +102,20 @@ public class FileManager {
 			chordnode.saveFileContent(filename, hash, bytesOfFile, false);
 
 		// create replicas of the filename
-		
+		BigInteger replica 
 		
 		// iterate over the replicas
 
+		
 		// for each replica, find its successor by performing findSuccessor(replica)
-
+		for (int i = 0; i < replicafiles.length; i++) {
+		chordnode = chordnode.findSuccessor(replicafiles[i]);
 		// call the addKey on the successor and add the replica
-
+		chordnode.addKey(id);
 		// call the saveFileContent() on the successor
+		
+		}
+		
 		
 
 		// increment counter

@@ -64,15 +64,15 @@ public class FileManager {
 		// set a loop where size = numReplicas
 		for (int i = 0; i < numReplicas; i++) {
 			// replicate by adding the index to filename
-			filename = filename+String.valueOf(i);
-			
+			filename = filename + String.valueOf(i);
+
 			// hash the replica
 			hash = Hash.hashOf(filename);
-			
+
 			// store the hash in the replicafiles array.
 			replicafiles[i] = hash;
-			
-	}
+
+		}
 
 	}
 
@@ -86,46 +86,35 @@ public class FileManager {
 
 		// Task1: Given a filename, make replicas and distribute them to all active
 		// peers such that: pred < replica <= peer
-		createReplicaFiles();
-		
-		NodeInterface successor = null;
-		NodeInterface predecessor = null;
-		
-		for (int i = 0; i < replicafiles.length; i++) {
-			successor = chordnode.findSuccessor(replicafiles[i]);
-			predecessor = chordnode.findSuccessor(replicafiles[i]).getPredecessor();
-		}
-		
-		
+
 		// Task2: assign a replica as the primary for this file. Hint, see the slide
 		// (project 3) on Canvas
+
+		// Vi gjør task 1 og 2 i en
 		Random rnd = new Random();
-		int index = rnd.nextInt(Util.numReplicas-1);
-		
-		//Key(file) = hash(file), der hash står sto egentlig fileId
-		hash = Hash.hashOf(filename);
-		
-		if (counter == index)
-			chordnode.saveFileContent(filename, hash, bytesOfFile, true); //save the file in the memory of the peer
-		else 
-			chordnode.saveFileContent(filename, hash, bytesOfFile, false);
+		int index = rnd.nextInt(Util.numReplicas - 1);
 
 		// create replicas of the filename
-		BigInteger replica 
-		
-		// iterate over the replicas
+		createReplicaFiles();
 
-		
-		// for each replica, find its successor by performing findSuccessor(replica)
+		// iterate over the replicas
 		for (int i = 0; i < replicafiles.length; i++) {
-		chordnode = chordnode.findSuccessor(replicafiles[i]);
-		// call the addKey on the successor and add the replica
-		chordnode.addKey(id);
-		// call the saveFileContent() on the successor
-		
+			BigInteger filId = replicafiles[i]; // Henter filens ID
+
+			// for each replica, find its successor by performing findSuccessor(replica)
+			NodeInterface successor = chordnode.findSuccessor(filId); // bruker filen for å hente neste peer
+
+			// call the addKey on the successor and add the replica
+			successor.addKey(filId);
+
+			// call the saveFileContent() on the successor
+			if (counter == index) {
+				successor.saveFileContent(filename, filId, bytesOfFile, true);
+			} else {
+				successor.saveFileContent(filename, filId, bytesOfFile, false);
+			}
+
 		}
-		
-		
 
 		// increment counter
 		counter++;

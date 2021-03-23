@@ -114,10 +114,10 @@ public class FileManager {
 				successor.saveFileContent(filename, filId, bytesOfFile, false);
 			}
 
-		}
+			// increment counter
+			counter++;
 
-		// increment counter
-		counter++;
+		}
 
 		return counter;
 	}
@@ -135,15 +135,21 @@ public class FileManager {
 		// Task: Given a filename, find all the peers that hold a copy of this file
 
 		// generate the N replicas from the filename by calling createReplicaFiles()
+		createReplicaFiles();
 
 		// it means, iterate over the replicas of the file
+		for (int i = 0; i < numReplicas; i++) {
+			//for each replica, do findSuccessor(replica) that returns successor s.
+			NodeInterface succ = chordnode.findSuccessor(replicafiles[i]);
 
-		// for each replica, do findSuccessor(replica) that returns successor s.
+			// get the metadata (Message) of the replica from the successor, s (i.e. active
+			// peer) of the file
+			Message msg = chordnode.getFilesMetadata(replicafiles[i]);
 
-		// get the metadata (Message) of the replica from the successor, s (i.e. active
-		// peer) of the file
+			// save the metadata in the set succinfo.
+			succinfo.add(msg);
 
-		// save the metadata in the set succinfo.
+		}
 
 		this.activeNodesforFile = succinfo;
 

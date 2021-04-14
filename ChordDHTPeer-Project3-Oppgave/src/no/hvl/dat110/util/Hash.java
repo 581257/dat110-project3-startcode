@@ -1,15 +1,6 @@
 package no.hvl.dat110.util;
 
-/**
- * project 3
-
- * @author Regine
- *
- */
-
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
-import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -48,12 +39,14 @@ public class Hash {
 		// Task: compute the address size of MD5
 
 		// get the digest length
-		int lenght = digest.length;
+//		int lenght = digest.length;
 		// compute the number of bits = digest length * 8
-		int bits = lenght * 8;
+//		int bits = lenght * 8;
+
+		int bits = bitSize();
 		// compute the address size = 2 ^ number of bits
-		
-		BigInteger two = new BigInteger("2");
+
+		BigInteger two = BigInteger.valueOf(2);
 		BigInteger addressSize = two.pow(bits);
 		// return the address size
 		return addressSize;
@@ -64,7 +57,6 @@ public class Hash {
 		int digestlen = digest.length;
 
 		// find the digest length
-		
 
 		return digestlen * 8;
 	}

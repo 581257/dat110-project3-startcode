@@ -39,11 +39,10 @@ public class Hash {
 		// Task: compute the address size of MD5
 
 		// get the digest length
-//		int lenght = digest.length;
 		// compute the number of bits = digest length * 8
-//		int bits = lenght * 8;
 
 		int bits = bitSize();
+		
 		// compute the address size = 2 ^ number of bits
 
 		BigInteger two = BigInteger.valueOf(2);

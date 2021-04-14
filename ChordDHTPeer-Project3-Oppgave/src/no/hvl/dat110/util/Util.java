@@ -55,24 +55,26 @@ public class Util {
 
 		BigInteger idMod = id.mod(addressSize);
 		
-		BigInteger lower1 = lower.mod(idMod);
+		BigInteger lowerMod = lower.mod(addressSize);
 
-		BigInteger upper1 = upper.mod(idMod);
+		BigInteger upperMod = upper.mod(addressSize);
 
 		BigInteger one = BigInteger.valueOf(1);
 
-		if (lower.compareTo(upper) > 0) {
+		if (lowerMod.compareTo(upperMod) > 0) { // lower > upper
+            // lower <= id <= upper blir til:
+            // lower <= id < asize || 0 <= id <= upper blir til
+            // (lower <= id && id < asize) || (0 <= id && id <= upper)
+            return ((lowerMod.compareTo(idMod) <= 0 && idMod.compareTo(addressSize) < 0)
+                    || (BigInteger.valueOf(0).compareTo(idMod) <= 0 && idMod.compareTo(upperMod) <= 0));
+        } else if (lowerMod.compareTo(upperMod) < 0){
+            // Sjekker om lower <= id <= upper blir til
+            // lower <= id && id <= upper
+            return (lowerMod.compareTo(idMod) <= 0 && idMod.compareTo(upperMod) <= 0);
+        } else {
+            return lowerMod.compareTo(idMod) == 0;
+        }
 
-			if ((idMod.compareTo(lower1.subtract(one)) <= 0) && (idMod.compareTo(upper1.add(one)) >= 0)) {
-				return false;
-			}
-		} else {
-			if ((idMod.compareTo(upper1) > 0) || (idMod.compareTo(lower1) < 0)) {
-				return false;
-			}
-		}
-
-		return true;
 	}
 
 	public static List<String> toString(List<NodeInterface> list) throws RemoteException {

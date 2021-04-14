@@ -64,8 +64,8 @@ public class FileManager {
 		// set a loop where size = numReplicas
 		for (int i = 0; i < numReplicas; i++) {
 			// replicate by adding the index to filename
-			filename ="";
-			filename = filename + String.valueOf(i);
+			
+			filename = String.valueOf(i);
 			
 
 			// hash the replica

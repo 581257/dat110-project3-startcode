@@ -53,11 +53,19 @@ public class Hash {
 
 	public static int bitSize() {
 
-		int digestlen = digest.length;
+		int digestlen;
+		try {
+			digestlen = MessageDigest.getInstance("MD5").getDigestLength();
+			return digestlen * 8;
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
 
 		// find the digest length
 
-		return digestlen * 8;
+		return 0;
 	}
 
 	public static String toHex(byte[] digest) {

@@ -55,19 +55,19 @@ public class Util {
 
 		BigInteger idMod = id.mod(addressSize);
 		
-		lower = lower.mod(idMod);
+		BigInteger lower1 = lower.mod(idMod);
 
-		upper = upper.mod(idMod);
+		BigInteger upper1 = upper.mod(idMod);
 
 		BigInteger one = BigInteger.valueOf(1);
 
 		if (lower.compareTo(upper) > 0) {
 
-			if ((idMod.compareTo(lower.subtract(one)) <= 0) && (idMod.compareTo(upper.add(one)) >= 0)) {
+			if ((idMod.compareTo(lower1.subtract(one)) <= 0) && (idMod.compareTo(upper1.add(one)) >= 0)) {
 				return false;
 			}
 		} else {
-			if ((idMod.compareTo(upper) > 0) || (idMod.compareTo(lower) < 0)) {
+			if ((idMod.compareTo(upper1) > 0) || (idMod.compareTo(lower1) < 0)) {
 				return false;
 			}
 		}

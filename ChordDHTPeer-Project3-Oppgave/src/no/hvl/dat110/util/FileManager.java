@@ -75,7 +75,6 @@ public class FileManager {
 			// store the hash in the replicafiles array.
 			replicafiles[i] = hash;
 
-			System.out.println(hash);
 		}
 
 	}

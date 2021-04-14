@@ -25,19 +25,37 @@ public class ChordLookup {
 		this.node = node;
 	}
 	
+	
+	/**
+	 * 
+	 * @param key
+	 * @return
+	 * @throws RemoteException
+	 * @author ehell
+	 */
 	public NodeInterface findSuccessor(BigInteger key) throws RemoteException {
 		
 		// ask this node to find the successor of key
+		// Gjøres i Node-klassen.
 		
 		// get the successor of the node
 		
+		NodeInterface successor = this.node.getSuccessor();
+		
 		// get the stub for this successor (Util.getProcessStub())
+		
+		NodeInterface stub = Util.getProcessStub(successor.getNodeName(), successor.getPort());
 		
 		// check that key is a member of the set {nodeid+1,...,succID} i.e. (nodeid+1 <= key <= succID) using the ComputeLogic
 		
-		// if logic returns true, then return the successor
-		
-		// if logic returns false; call findHighestPredecessor(key)
+		if(Util.computeLogic(key, this.node.getNodeID().add(BigInteger.valueOf(1)), successor.getNodeID())) {
+			// if logic returns true, then return the successor
+			return successor;
+		}
+		else {
+			// if logic returns false; call findHighestPredecessor(key)
+			findHighestPredecessor(key);	
+		}
 		
 		// do return highest_pred.findSuccessor(key) - This is a recursive call until logic returns true
 				

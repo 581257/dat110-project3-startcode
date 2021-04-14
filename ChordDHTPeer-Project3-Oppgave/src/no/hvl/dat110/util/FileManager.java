@@ -60,10 +60,11 @@ public class FileManager {
 	public void createReplicaFiles() {
 
 		// implement
-
+		
 		// set a loop where size = numReplicas
 		for (int i = 0; i < numReplicas; i++) {
 			// replicate by adding the index to filename
+			filename ="";
 			filename = filename + String.valueOf(i);
 			
 

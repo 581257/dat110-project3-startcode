@@ -61,9 +61,10 @@ public class Hash {
 
 	public static int bitSize() {
 
-		int digestlen = 0;
+		int digestlen = digest.length;
 
 		// find the digest length
+		
 
 		return digestlen * 8;
 	}

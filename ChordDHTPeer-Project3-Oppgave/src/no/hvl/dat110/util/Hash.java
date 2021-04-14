@@ -16,6 +16,7 @@ import java.security.NoSuchAlgorithmException;
 public class Hash {
 
 	private static BigInteger hashint;
+	private static byte[] digest;
 
 	public static BigInteger hashOf(String entity) {
 
@@ -26,42 +27,36 @@ public class Hash {
 		try {
 			// compute the hash of the input 'entity'
 			MessageDigest md = MessageDigest.getInstance("MD5");
-			byte[] digest = md.digest(entity.getBytes());
-			
+			digest = md.digest(entity.getBytes());
+
 			// convert the hash into hex format
 			String hex = toHex(digest);
-			
+
 			// convert the hex into BigInteger
-			hashint = new BigInteger(hex,16);
-		
-			
-			
-			
+			hashint = new BigInteger(hex, 16);
 
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		// return the BigInteger
 		return hashint;
 	}
-	
-	
 
 	public static BigInteger addressSize() {
 
 		// Task: compute the address size of MD5
 
 		// get the digest length
-
+		int lenght = digest.length;
 		// compute the number of bits = digest length * 8
-
+		int bits = lenght * 8;
 		// compute the address size = 2 ^ number of bits
-
+		
+		BigInteger two = new BigInteger("2");
+		BigInteger addressSize = two.pow(bits);
 		// return the address size
-
-		return null;
+		return addressSize;
 	}
 
 	public static int bitSize() {

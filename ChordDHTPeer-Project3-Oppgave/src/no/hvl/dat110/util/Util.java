@@ -6,7 +6,6 @@ package no.hvl.dat110.util;
  * @author tdoy
  */
 
-
 import java.math.BigInteger;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -36,6 +35,15 @@ public class Util {
 	 * @param lower
 	 * @param upper
 	 * @return true if (lower <= id <= upper) or false otherwise
+	 */
+	
+	/** 
+	 * 
+	 * @author ehell
+	 * @param id
+	 * @param lower
+	 * @param upper
+	 * @return
 	 */
 	public static boolean computeLogic(BigInteger id, BigInteger lower, BigInteger upper) {
 		

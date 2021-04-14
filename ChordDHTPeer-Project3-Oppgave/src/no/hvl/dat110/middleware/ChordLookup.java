@@ -66,35 +66,35 @@ public class ChordLookup {
 
 	/**
 	 * This method makes a remote call. Invoked from a local client
+	 * 
 	 * @param ID BigInteger
 	 * @return
 	 * @throws RemoteException
 	 */
 	private NodeInterface findHighestPredecessor(BigInteger key) throws RemoteException {
-		
-		// collect the entries in the finger table for this node
-		
-	List<NodeInterface> fingerTable = this.node.getFingerTable();
 
-	// starting from the last entry, iterate over the finger table
-	
-	
-	for(int i = fingerTable.size()-1; i > 0; i--) {
-		
-		// for each finger, obtain a stub from the registry
-		NodeInterface stub = fingerTable.get(i).;
-		
-		// check that finger is a member of the set {nodeID+1,...,ID-1} i.e. (nodeID+1 <= finger <= key-1) using the ComputeLogic
-		if(Util.computeLogic(, stub.getNodeID().add(BigInteger.valueOf(1)), key.subtract(BigInteger.valueOf(1)))) {
-			// if logic returns true, then return the finger (means finger is the closest to key)
-			return stub;
+		// collect the entries in the finger table for this node
+
+		List<NodeInterface> fingerTable = this.node.getFingerTable();
+
+		// starting from the last entry, iterate over the finger table
+
+		for (int i = fingerTable.size() - 1; i > 0; i--) {
+
+			// for each finger, obtain a stub from the registry
+			NodeInterface finger = fingerTable.get(i);
+
+			// check that finger is a member of the set {nodeID+1,...,ID-1} i.e. (nodeID+1
+			// <= finger <= key-1) using the ComputeLogic
+			if (Util.computeLogic(finger.getNodeID(), this.node.getNodeID().add(BigInteger.valueOf(1)),
+					key.subtract(BigInteger.valueOf(1)))) {
+				// if logic returns true, then return the finger (means finger is the closest to
+				// key)
+				return finger;
+			}
 		}
-	}
-		
-		
-		
-		
-		return (NodeInterface) node;			
+
+		return (NodeInterface) this.node;
 	}
 
 	public void copyKeysFromSuccessor(NodeInterface succ) {

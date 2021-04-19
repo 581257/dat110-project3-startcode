@@ -178,32 +178,34 @@ public class MutualExclusion {
 		 */
 		case 2: {
 			// check the clock of the sending process
+			int klokkeSender = message.getClock();
+			
 			// own clock for the multicast message
+			int thisKlokke = this.clock.getClock();
+			
 			// compare clocks, the lowest wins
-			NodeInterface stub;
-			if (message.getClock() < this.clock.getClock()) {
-				// if sender wins, acknowledge the message, obtain a stub and call
-				// onMutexAcknowledgementReceived()
-				message.setAcknowledged(true);
-				stub = Util.getProcessStub(message.getNodeIP(), message.getPort());
-				stub.onMutexAcknowledgementReceived(message);
-			} else if (message.getClock() == this.clock.getClock()) {
-				// if clocks are the same, compare nodeIDs, the lowest wins
-				if (message.getNodeID().compareTo(this.node.getNodeID()) < 0) {
+			// if clocks are the same, compare nodeIDs, the lowest wins
+			if (klokkeSender == thisKlokke) {
+				BigInteger senderID = message.getNodeID();
+				BigInteger egenID = this.node.getNodeID();
+				if (senderID.compareTo(egenID) < 0) {
+					
 					message.setAcknowledged(true);
-					stub = Util.getProcessStub(message.getNodeIP(), message.getPort());
+					NodeInterface stub = Util.getProcessStub(message.getNodeIP(), message.getPort()); //?
 					stub.onMutexAcknowledgementReceived(message);
-				} else {
-					this.node.getMessage().setAcknowledged(true);
-					stub = Util.getProcessStub(this.node.getMessage().getNodeIP(), this.node.getMessage().getPort());
-					stub.onMutexAcknowledgementReceived(this.node.getMessage());
-
-					// if sender looses, queue it
-					queue.add(message);
 				}
-
-				break;
+			} else if (klokkeSender < thisKlokke) {
+				this.mutexqueue.add(message);
+			} else {
+				message.setAcknowledged(true);
+				NodeInterface stub = Util.getProcessStub(message.getNodeIP(), message.getPort()); //?
+				stub.onMutexAcknowledgementReceived(message);
 			}
+			// if sender wins, acknowledge the message, obtain a stub and call
+			// onMutexAcknowledgementReceived()
+			// if sender looses, queue it
+
+			break;
 		}
 
 		default:

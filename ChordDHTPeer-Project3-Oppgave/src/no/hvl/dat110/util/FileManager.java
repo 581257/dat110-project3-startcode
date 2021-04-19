@@ -148,7 +148,7 @@ public class FileManager {
 			// get the metadata (Message) of the replica from the successor, s (i.e. active
 			// peer) of the file
 			
-			Message msg = chordnode.getFilesMetadata(succ.getNodeID());
+			Message msg = succ.getFilesMetadata(replicafiles[i]);
 
 			// save the metadata in the set succinfo.
 			succinfo.add(msg);

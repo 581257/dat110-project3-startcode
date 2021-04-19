@@ -96,7 +96,7 @@ public class MutualExclusion {
 
 			try {
 				// call onMutexRequestReceived()
-				stub.onMutexRequestReceived(m);
+				stub.onMutexRequestReceived(message);
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

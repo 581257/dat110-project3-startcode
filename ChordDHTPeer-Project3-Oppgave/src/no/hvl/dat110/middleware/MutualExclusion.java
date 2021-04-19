@@ -51,6 +51,8 @@ public class MutualExclusion {
 		
 		// clear the queueack before requesting for votes
 		
+		
+		
 		// clear the mutexqueue
 		
 		// increment clock

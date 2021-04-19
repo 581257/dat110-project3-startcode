@@ -96,7 +96,7 @@ public class MutualExclusion {
 
 			try {
 				// call onMutexRequestReceived()
-				stub.onMutexRequestReceived(message);
+				stub.onMutexRequestReceived(m);
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -107,7 +107,7 @@ public class MutualExclusion {
 	public void onMutexRequestReceived(Message message) throws RemoteException {
 
 		// increment the local clock
-		clock.increment();
+		this.clock.increment();
 
 		// if message is from self, acknowledge, and call
 		// onMutexAcknowledgementReceived()

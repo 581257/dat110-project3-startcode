@@ -57,7 +57,7 @@ public class MutualExclusion {
 		// clear the mutexqueue
 		mutexqueue.clear();
 		// increment clock
-		clock.increment();
+		this.clock.increment();
 		// adjust the clock on the message, by calling the setClock on the message
 		message.setClock(this.clock.getClock());
 		// wants to access resource - set the appropriate lock variable
@@ -69,7 +69,7 @@ public class MutualExclusion {
 		// file. This peer will appear twice
 		List<Message> activeNodes = removeDuplicatePeersBeforeVoting();
 		// multicast the message to activenodes (hint: use multicastMessage)
-		multicastMessage(message, mutexqueue);
+		multicastMessage(message, activeNodes);
 		// check that all replicas have replied (permission)
 
 		boolean allReplicasReplied = areAllMessagesReturned(activeNodes.size());
